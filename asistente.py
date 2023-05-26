@@ -1,23 +1,26 @@
 import speech_recognition as sr
 import pyttsx3
 import threading
+import pywhatkit 
+
 
 r=sr.Recognizer()
 voz=pyttsx3.init()
+
 
 def habla(texto):
     voz.say(texto)
     voz.runAndWait()
 
 def escucha():   
-    '''def detener_escucha():
-        r.stop_listening() '''
 
     with sr.Microphone() as source:
-        print ("¿Qué quieres que haga por ti?")
+        r.adjust_for_ambient_noise(source)
+        #print ("¿Qué quieres que haga por ti?")
         #habla("¿Qué quieres que haga por ti?")
         try:
-            audio=r.listen(source, timeout=5)
+            r.pause_threshold = 0.8
+            audio=r.listen(source)
         except sr.WaitTimeoutError:
             return ''
         
@@ -34,12 +37,29 @@ def escucha():
         print("Could not request results from Google Speech Recognition service; {0}".format(e))
         return ''
     
-    
 
-while True:
-   peticion=escucha().lower()
-   if peticion == "oye raspi":
-       habla("Hola, ¿Qué necesitas?")
-   if peticion =="salir":
-       habla ("Hasta luego")
-       break
+
+    
+    
+if __name__=='__main__':
+    while True:
+       print ("¿Qué quieres que haga por ti?")
+       peticion=escucha().lower()
+       if peticion == "oye raspi":
+           habla("Hola, ¿Qué necesitas?")
+       if  'youtube' in peticion:
+                    while True:
+                        habla('Vale, que quieres ver')
+                        video=escucha().lower()
+                        print (video)
+                        if video == '':
+                             print ("No te he entendido")                        
+                        elif 'risitas' in video:
+                            pywhatkit.playonyt('https://www.youtube.com/watch?v=QT13kk8HDDo')
+                            break
+                        else:
+                             pywhatkit.playonyt(video)
+                             break
+       if 'salir' in peticion or 'adios' in peticion:
+           habla ("Hasta luego")
+           break
