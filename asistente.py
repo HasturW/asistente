@@ -1,7 +1,8 @@
 import speech_recognition as sr
 import pyttsx3
 import threading
-import pywhatkit 
+#import pywhatkit 
+import os_ops as oo
 
 
 r=sr.Recognizer()
@@ -48,7 +49,8 @@ if __name__=='__main__':
        peticion=escucha().lower()
        if peticion == "oye raspi":
            habla("Hola, ¿Qué necesitas?")
-       if  'youtube' in peticion:
+        # Seccion youtube
+       ''' if  'youtube' in peticion:
                     while True:
                         habla('Vale, que quieres ver')
                         video=escucha().lower()
@@ -61,7 +63,42 @@ if __name__=='__main__':
                         else:
                              pywhatkit.playonyt(video)
                              break
-       if 'salir' in peticion or 'adios' in peticion:
+        '''
+        # Servicios de linux
+            #Apache
+
+       if ('levanta' in peticion or 'sube' in peticion or 'enciende' in peticion) and ('apache' in peticion or 'web' in peticion):
+            print ("Levanto server de apache")
+            habla ("Levanto server de apache")
+            oo.apacheup()
+       if ('tira' in peticion or 'apaga' in peticion) and ('apache' in peticion or 'web' in peticion):
+            oo.apachedown()
+            print ("Apago server de apache")
+            habla ("Apago server de apache")
+
+            #FTP
+
+       if ('levanta' in peticion or 'sube' in peticion or 'enciende' in peticion) and 'ftp' in peticion:
+            print ("Levanto server de FTP")
+            habla ("Levanto server de FTP")
+            oo.ftpup()
+       if ('tira' in peticion or 'apaga' in peticion) and 'ftp' in peticion:
+            oo.ftpdown()
+            print ("Apago server de FTP")
+            habla ("Apago server de FTP")
+
+            #SSH
+
+       if ('levanta' in peticion or 'sube' in peticion or 'enciende' in peticion) and 'ssh' in peticion:
+            print ("Levanto server de SSH")
+            habla ("Levanto server de SSH")
+            oo.sshup()
+       if ('tira' in peticion or 'apaga' in peticion) and 'ssh' in peticion:
+            oo.sshdown()
+            print ("Apago server de SSH")
+            habla ("Apago server de SSH")
+
+       if 'salir' in peticion or 'adiós' in peticion:
            habla ("Hasta luego")
            break
 
