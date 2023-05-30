@@ -8,3 +8,4 @@ Este proyecto necesitará de ciertos elementos previos para ser empleados, se re
 
 ```pip3 install speechrecognition```
 ```pip3 install pyaudio```
+```pip3 install pywhatkit```
