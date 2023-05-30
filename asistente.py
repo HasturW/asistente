@@ -6,6 +6,7 @@ import pywhatkit
 
 r=sr.Recognizer()
 voz=pyttsx3.init()
+voz.setProperty('rate', 190)
 
 
 def habla(texto):
@@ -63,3 +64,4 @@ if __name__=='__main__':
        if 'salir' in peticion or 'adios' in peticion:
            habla ("Hasta luego")
            break
+
