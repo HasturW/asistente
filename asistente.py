@@ -7,7 +7,8 @@ import os_ops as oo
 
 r=sr.Recognizer()
 voz=pyttsx3.init()
-voz.setProperty('rate', 190)
+voz.setProperty('rate', 150)
+voz.setProperty('voice', 'spanish')
 
 
 def habla(texto):
